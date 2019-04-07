@@ -4,7 +4,7 @@
 
 K-means algorithm is the most well-known and commonly used clustering
 method. It takes the input parameter, k, and partitions a set of n objects into
-k clusters so that similarity of points outside cluster is high. Cluster similarity is measured according to the mean.
+k clusters so that similarity of points inside cluster is high. Cluster similarity is measured according to the mean.
 
 \label{Chapter3} % Change 3 to a consecutive number; for referencing this chapter elsewhere, use \ref{Chapter3}
 
@@ -14,10 +14,10 @@ k clusters so that similarity of points outside cluster is high. Cluster similar
 
 \section{Instructions for running k-means in Cloudera}
 Before running k-means algorithm, we need to follow some steps. First of all, \textit{download MapReduce folder} from our gitHub repository.\\
-MapReduce folder includes six main files which are mapper.py, reducer.py, reader.py, run.sh, centroids.txt, dataset.txt. As regards, centroids.txt file includes three points in the shape of (x,y), that k-means algorithm gets as initial centroids. These points were selected in a way that k-means to be executed more than one times, but less than five so as the whole process not to be that long. On the other hand,  the dataset.txt file is the one that was created in the previous chapter.These six files are necessary for k-means to be implemented and they are needed to be in the same folder. \\
+MapReduce folder includes six main files which are mapper.py, reducer.py, reader.py, run.sh, centroids.txt, dataset.txt. centroids.txt file includes three points in the shape of (x,y), that k-means algorithm gets as initial centroids. These points were selected in a way that k-means to be executed more than one times, but less than five so as the whole process not to be that long. Furthermore, the dataset.txt file is the one that was created in the previous chapter.These six files are necessary for k-means and they need to be in the same folder. \\
 After that, you need to enter MapReduce folder from terminal by using the command cd \textit{/path-to-MapReduce-Folder/MapReduce}.
 Secondly, you need to \textit{install Python3 in Cloudera}. For this purpose, you can read [10].\\
-In addition, we need to create a folder named "testMapReduce" in hdfs and parse dataset.txt file inside this folder. In order to create a folder in hdfs you can execute \textit{hadoop fs –mkdir /testMapReduce} and to parse dataset \textit{hadoop fs –copyFromLocal dataset.txt /testMapReduce/dataset.txt} command.\\
+In addition, we need to create a folder named "testMapReduce" in hdfs and transfer dataset.txt file inside this folder. In order to create a folder in hdfs you can execute \textit{hadoop fs –mkdir /testMapReduce} and to transfer dataset \textit{hadoop fs –copyFromLocal dataset.txt /testMapReduce/dataset.txt} command.\\
 Finally, to run k-means algorithm you need to type \textit{sh run.sh}.
 
 %----------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 To implement mapreduce in hadoop, we created two files, mapper.py and reducer.py, as described in [4] and [8].
 
 \subsection{mapper.py}
- A regards mapper, mapper's job is to create the clusters. More specifically, every point of the dataset is matching with one of the centroids that are in the centroid.txt file at the time. So, in the end clusters are generated, which in our case are three in number.
+ As regards mapper, mapper's job is to create the clusters. More specifically, every point of the dataset matches with one of the centroids that are in the centroid.txt file at the time. So, in the end 3 clusters are generated.
  
  \HRule \\[0.2cm] % Horizontal line
  
@@ -160,7 +160,7 @@ if __name__ == "__main__":
 \end{lstlisting}
 
 \subsection{reducer.py}
- On the other hand, reducer's job is to find the average centroids from the newly given cluster map . More specifically, every point of each cluster is being adding in order the center of this cluster to be found. So, in the end new centroids of each cluster are generated.
+ On the other hand, reducer's job is to find the average centroids from the newly given cluster map . More specifically, every point of each cluster is being added in order the center of this cluster to be found. So, in the end the new centroids of each cluster are generated.
  
   \HRule \\[0.2cm] % Horizontal line
   
@@ -219,7 +219,7 @@ if __name__ == "__main__":
 \end{lstlisting}
 
 \section{Plot Representation}
-Last but not least, we wanted to visualize the implementation of k-means in hadoop so as to ensure that our results is the correct ones. \\\\
+Last but not least, we wanted to visualize the implementation of k-means in hadoop so as to ensure that our results are the correct ones. \\\\
 For this purpose, we created the following python script named \textbf{printer.py} which generates the images shown bellow, starting from the first generated plot.
 
 \HRule \\[0.4cm] % Horizontal line

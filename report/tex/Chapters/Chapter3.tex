@@ -16,7 +16,7 @@ k clusters so that similarity of points outside cluster is high. Cluster similar
 Before running k-means algorithm, we need to follow some steps. First of all, \textit{download MapReduce folder} from our gitHub repository.\\
 MapReduce folder includes six main files which are mapper.py, reducer.py, reader.py, run.sh, centroids.txt, dataset.txt. As regards, centroids.txt file includes three points in the shape of (x,y), that k-means algorithm gets as initial centroids. These points were selected in a way that k-means to be executed more than one times, but less than five so as the whole process not to be that long. On the other hand,  the dataset.txt file is the one that was created in the previous chapter.These six files are necessary for k-means to be implemented and they are needed to be in the same folder. \\
 After that, you need to enter MapReduce folder from terminal by using the command cd \textit{/path-to-MapReduce-Folder/MapReduce}.
-Secondly, you need to \textit{install Python3 in Cloudera}. For this purpose, you can read \cite{Python3Cloudera}.\\
+Secondly, you need to \textit{install Python3 in Cloudera}. For this purpose, you can read [10].\\
 In addition, we need to create a folder named "testMapReduce" in hdfs and parse dataset.txt file inside this folder. In order to create a folder in hdfs you can execute \textit{hadoop fs –mkdir /testMapReduce} and to parse dataset \textit{hadoop fs –copyFromLocal dataset.txt /testMapReduce/dataset.txt} command.\\
 Finally, to run k-means algorithm you need to type \textit{sh run.sh}.
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 \end{lstlisting}
 
 \section{MapReduce}
-To implement mapreduce in hadoop, we created two files, mapper.py and reducer.py, as described in \cite{MapReducePythonPaper1} and \cite{MapReducePythonPaper2}.
+To implement mapreduce in hadoop, we created two files, mapper.py and reducer.py, as described in [4] and [8].
 
 \subsection{mapper.py}
  A regards mapper, mapper's job is to create the clusters. More specifically, every point of the dataset is matching with one of the centroids that are in the centroid.txt file at the time. So, in the end clusters are generated, which in our case are three in number.
@@ -219,7 +219,89 @@ if __name__ == "__main__":
 \end{lstlisting}
 
 \section{Plot Representation}
+Last but not least, we wanted to visualize the implementation of k-means in hadoop so as to ensure that our results is the correct ones. \\\\
+For this purpose, we created the following python script named \textbf{printer.py} which generates the images shown bellow, starting from the first generated plot.
 
+\HRule \\[0.4cm] % Horizontal line
+\begin{lstlisting}[language=Python]
+import matplotlib.pyplot as plt
+from scipy.spatial import distance
+
+centroids=[]
+
+# initiliaze list for points
+X=[[[],[]],[[],[]],[[],[]]]
+# initiliaze list for centroids
+M=[[],[]]
+
+# import centroids.txt file
+filepath = 'centroids.txt'
+with open(filepath) as fp:
+	# read line by line
+	line = fp.readline()
+	while line:
+		if line:
+			# delete blanks for each lines
+			line = line.strip()
+			# extract centroids coordinates
+			cord = line.split(', ')
+			centroids.append((float(cord[0]), float(cord[1])))
+			M[0].append((float(cord[0])))
+			M[1].append((float(cord[1])))
+		else:
+			break
+	line = fp.readline()
+
+fp.close()
+
+# import dataset.txt file
+filepath = 'dataset.txt'
+with open(filepath) as fp:
+	# read line by line
+	line = fp.readline()
+	while line:
+		if line:
+			# delete blanks for each lines
+			line = line.strip()
+			# extract points coordinates
+			cord = line.split(',')
+			x = (float(cord[0]), float(cord[1]))
+			# implement k means loop
+			# find the nearest centroid
+			dist = 100000000000000
+			selected_m = -1
+			for m in centroids:
+				test_distance = distance.euclidean(x, m)
+				if test_distance < dist:
+					dist = test_distance
+					selected_m = centroids.index(m)
+					
+					X[selected_m][0].append(x[0])
+					X[selected_m][1].append(x[1])
+		else:
+			break
+		line = fp.readline()
+
+fp.close()
+
+# print cluster 0 with red color
+plt.plot(X[0][0], X[0][1], 'ro')
+# print cluster 1 with green color
+plt.plot(X[1][0], X[1][1], 'go')
+# print cluster 2 with blue color
+plt.plot(X[2][0], X[2][1], 'bo')
+# print centroids with yellow color
+plt.plot(M[0], M[1], 'yo')
+plt.axis([-22, 20, -50, 40])
+plt.show()
+\end{lstlisting}
+\HRule \\[0.2cm] % Horizontal line
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{../images/before_kmeans.png}\\
+\includegraphics[width=0.6\textwidth]{../images/first_iteration.png}\\
+\includegraphics[width=0.6\textwidth]{../images/after_kmeans.png}\\
+\end{center}
 
 
 

@@ -1,0 +1,15 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Hadoop Installation}{1}{chapter.2}
+\contentsline {chapter}{\numberline {2}Dataset Creation}{2}{chapter.3}
+\contentsline {section}{\numberline {2.1}createDataset.py}{2}{section.4}
+\contentsline {section}{\numberline {2.2}Plot of data points}{4}{section.76}
+\contentsline {chapter}{\numberline {3}K-means Clustering Algorithm}{5}{chapter.77}
+\contentsline {section}{\numberline {3.1}Instructions for running k-means in Cloudera}{5}{section.78}
+\contentsline {section}{\numberline {3.2}run.sh \& reader.py}{5}{section.79}
+\contentsline {subsection}{\numberline {3.2.1}run.sh}{6}{subsection.80}
+\contentsline {subsection}{\numberline {3.2.2}reader.py}{6}{subsection.105}
+\contentsline {section}{\numberline {3.3}MapReduce}{7}{section.131}
+\contentsline {subsection}{\numberline {3.3.1}mapper.py}{7}{subsection.132}
+\contentsline {subsection}{\numberline {3.3.2}reducer.py}{8}{subsection.199}
+\contentsline {section}{\numberline {3.4}Plot Representation}{9}{section.252}

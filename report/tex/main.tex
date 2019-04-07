@@ -1,0 +1,224 @@
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+english,
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{HadoopAssignment} % The class file specifying the document structure
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage{mathpazo} % Use the Palatino font by default
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\usepackage{listings}
+    \lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=3
+}
+
+\lstset{ 
+	style=mystyle,
+	basicstyle=\small\ttfamily,
+	breaklines=true
+}
+
+\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\addbibresource{example.bib} % The filename of the bibliography
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+
+%----------------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%----------------------------------------------------------------------------------------
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	THESIS INFORMATION
+%----------------------------------------------------------------------------------------
+
+\thesistitle{K-Means clustering algorithm in MapReduce}
+\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
+\author{Klio \textsc{Fragkedaki}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
+
+\subject{Natural Language Processing} % this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{\href{https://aueb.gr/}{Athens University of Economics and Business}}
+\department{\href{https://my.dmst.aueb.gr/}{Department of Management Science and Technology}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}
+
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\vspace*{.06\textheight}
+{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
+
+\HRule \\[0.4cm] % Horizontal line
+{\LARGE \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
+\HRule \\[1.5cm] % Horizontal line
+ 
+\begin{minipage}[t]{0.4\textwidth}
+\begin{center} \large
+\emph{Authors:}\\
+Vaggelis Malandrakis\\[0.2cm]
+Kleio Fragkedaki 
+\end{center}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+
+\end{minipage}\\[3cm]
+ 
+\vfill
+
+\large \textit{Course:} Big Data Management Systems\\[0.3cm]
+\textit{Professor:} Damianos Chatziantoniou\\[0.4cm]
+\deptname\\[2cm] % Department name
+ 
+\vfill
+\vspace{5cm}
+
+{\large \today}\\[4cm] % Date
+%\includegraphics{Logo} % University/department logo - uncomment to place it
+ 
+\end{center}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+
+\include{Chapters/Chapter1}
+\include{Chapters/Chapter2} 
+\include{Chapters/Chapter3}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+\renewcommand\bibname{References}
+\begin{thebibliography}{9}
+	
+	\bibitem{scipy.stats.skewnorm}
+	Scipy documentation. 
+	\url{https://docs.scipy.org/doc/scipy-1.2.0/reference/generated/scipy.stats.skewnorm.html}
+	
+	\bibitem{scipy.stats.skewnorm}
+	Github of scipy library.
+	\url{https://github.com/scipy/scipy/blob/v1.2.1/scipy/stats/_continuous_distns.py}
+	
+	\bibitem{random point of circle}
+	Circle- choose a random point from a circle.\\
+	\url{https://stackoverflow.com/questions/14096138/find-the-point-on-a-circle-with-given-center-point-radius-and-degree}
+	
+	\bibitem{MapReduceKmeans} 
+	Max Bodoia
+	\textit{MapReduce Algorithms for k-means Clustering}. 
+	\url {https://stanford.edu/~rezab/classes/cme323/S16/projects_reports/bodoia.pdf?fbclid=IwAR1mhpyJotsJjK39AGCq0ttm-woRy-l-T9VK7Ssmib7oZduxju7-lqkni3k/}
+	
+    \bibitem{MapReducePythonPaper1} 
+	MapReduce in Python. 
+	\url{https://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/}
+	
+	\bibitem{MapReducePython} 
+	MapReduce in Python.
+	\url{http://www.quuxlabs.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/}
+	
+    \bibitem{MapReducePython} 
+	MapReduce in Python.
+	\url{https://blog.matthewrathbone.com/2013/11/17/python-map-reduce-on-hadoop-a-beginners-tutorial.html}
+	
+	\bibitem{MapReducePythonPaper2} 
+	Weizhong Zhao, Huifang Ma and Qing He.\\
+	\textit{Parallel K-Means Clustering Based on MapReduce}
+	\url{https://www.cs.ucsb.edu/~veronika/MAE/parallelkmeansmapreduce_zhao.pdf}
+	
+	\bibitem{KmeansMapReducePython}
+	K-means MapReduce Python Hadoop.
+	\url{https://github.com/ArsMing276/Kmeans_Implementation_with_Mapreduce}
+	
+	\bibitem{pythoncloudera}
+	Install Python3 on CENT OS 7.\\
+	\url{https://linuxize.com/post/how-to-install-python-3-on-centos-7/}
+	
+	\bibitem{VirtualBox}
+	Oracle Virtual Box
+	\url{https://www.virtualbox.org/wiki/Downloads}
+	
+	\bibitem{Cloudera}
+	Cloudera Quickstart VM
+	\url{https://www.cloudera.com/downloads/quickstart_vms/5-13.html}
+	
+	
+	
+ 
+	
+\end{thebibliography}
+%----------------------------------------------------------------------------------------
+
+\end{document}  
